@@ -1435,11 +1435,13 @@ function CharacterTracker:showCharacterDetail(character)
         table.insert(text_parts, sep .. "\n")
         for _i, rel in ipairs(outgoing) do
             local label = getRelationshipLabel(rel.type)
-            table.insert(text_parts, "  → " .. rel.target .. " (" .. label .. ")\n")
+            -- table.insert(text_parts, "  → " .. rel.target .. " (" .. label .. ")\n")
+            table.insert(text_parts, label .. " of " .. rel.target .. "\n")
         end
         for _i, rel in ipairs(incoming) do
             local label = getRelationshipLabel(rel.type)
-            table.insert(text_parts, "  ← " .. rel.source .. " (" .. label .. ")\n")
+            -- table.insert(text_parts, "  ← " .. rel.source .. " (" .. label .. ")\n")
+            table.insert(text_parts, rel.source .. "'s " .. label .. "\n")
         end
     end
 
@@ -1651,7 +1653,8 @@ function CharacterTracker:onAssignHighlightToCharacter(selected)
     end
 
     -- Offer to create a new character using the selection as name
-    -- local first_word = trimmed:match("^(%S+)") or "" <- unused variable
+    -- local first_word = trimmed:match("^(%S+)") or ""
+        -- gets all the text that was selected
     self:showAddCharacterDialog(selected_text)
 end
 
