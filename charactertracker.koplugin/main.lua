@@ -1651,8 +1651,8 @@ function CharacterTracker:onAssignHighlightToCharacter(selected)
     end
 
     -- Offer to create a new character using the selection as name
-    local first_word = trimmed:match("^(%S+)") or ""
-    self:showAddCharacterDialog(first_word)
+    -- local first_word = trimmed:match("^(%S+)") or "" <- unused variable
+    self:showAddCharacterDialog(selected_text)
 end
 
 -- ============================================================
