@@ -358,7 +358,9 @@ function CharacterTracker:getDataFilePath()
         self.data_file = self:getSeriesDir() .. "/" .. safe_name .. ".json"
     else
         local doc_path = self.ui.document.file
-        self.data_file = doc_path .. ".characters.json"
+        -- self.data_file = doc_path .. ".characters.json"
+        local sidecar_dir = self.ui.doc_settings:getSidecarDir(doc_path)
+        self.data_file = sidecar_dir .. "/" .. doc_path .. ".characters.json"
     end
     return self.data_file
 end
@@ -1435,12 +1437,10 @@ function CharacterTracker:showCharacterDetail(character)
         table.insert(text_parts, sep .. "\n")
         for _i, rel in ipairs(outgoing) do
             local label = getRelationshipLabel(rel.type)
-            -- table.insert(text_parts, "  → " .. rel.target .. " (" .. label .. ")\n")
-            table.insert(text_parts, rel.target .. " (" .. label .. ")\n")
+            table.insert(text_parts, "(" .. label .. ") " .. rel.target .. "\n")
         end
         for _i, rel in ipairs(incoming) do
             local label = getRelationshipLabel(rel.type)
-            -- table.insert(text_parts, "  ← " .. rel.source .. " (" .. label .. ")\n")
             table.insert(text_parts, rel.source .. "'s " .. label .. "\n")
         end
     end
@@ -1654,7 +1654,7 @@ function CharacterTracker:onAssignHighlightToCharacter(selected)
 
     -- Offer to create a new character using the selection as name
     local first_word = trimmed:match("^(%S+)") or ""
-    self:showAddCharacterDialog(first_word)
+    self:showAddCharacterDialog(selected_text)
 end
 
 -- ============================================================
