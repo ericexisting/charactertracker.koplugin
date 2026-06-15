@@ -360,7 +360,7 @@ function CharacterTracker:getDataFilePath()
         local doc_path = self.ui.document.file
         -- self.data_file = doc_path .. ".characters.json"
         local sidecar_dir = self.ui.doc_settings:getSidecarDir(doc_path)
-        self.data_file = sidecar_dir .. "/" .. doc_path .. ".characters.json"
+        self.data_file = sidecar_dir .. "/characters.json"
     end
     return self.data_file
 end
